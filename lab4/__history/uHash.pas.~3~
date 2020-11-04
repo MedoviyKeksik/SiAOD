@@ -1,0 +1,11 @@
+unit uHash;
+
+interface
+
+type
+  THash = DWord;
+  THashF<T> = function(const X: T):
+
+implementation
+
+end.

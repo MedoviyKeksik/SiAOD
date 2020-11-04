@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.862,D:\Student\SiAOD\lab1\main.pas=D:\Student\OAiP\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.039,D:\Student\SiAOD\lab1\frmMain.dfm=D:\Student\SiAOD\lab1\main.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.005,D:\Student\SiAOD\lab1\labirinth.dproj=D:\Student\OAiP\Project1.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.039,D:\Student\SiAOD\lab1\frmMain.pas=D:\Student\SiAOD\lab1\main.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.196,D:\Student\SiAOD\lab1\uMain.pas=D:\Student\SiAOD\lab1\frmMain.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.196,D:\Student\SiAOD\lab1\uMain.dfm=D:\Student\SiAOD\lab1\frmMain.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.862,D:\Student\SiAOD\lab1\main.dfm=D:\Student\OAiP\Unit1.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.084,=D:\Student\OAiP\Unit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>

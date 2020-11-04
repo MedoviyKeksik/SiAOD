@@ -1,0 +1,64 @@
+object frmMain: TfrmMain
+  Left = 0
+  Top = 0
+  Caption = 'Labirinth'
+  ClientHeight = 436
+  ClientWidth = 655
+  Color = clBtnFace
+  DoubleBuffered = True
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  Menu = menuMain
+  OldCreateOrder = False
+  OnCreate = FormCreate
+  OnPaint = FormPaint
+  PixelsPerInch = 96
+  TextHeight = 13
+  object imgMain: TImage
+    Left = 24
+    Top = 24
+    Width = 400
+    Height = 400
+    OnMouseMove = imgMainMouseMove
+  end
+  object lblHelp: TLabel
+    Left = 448
+    Top = 24
+    Width = 80
+    Height = 13
+    Caption = 'Choose the level'
+    WordWrap = True
+  end
+  object lblLevel: TLabel
+    Left = 447
+    Top = 69
+    Width = 28
+    Height = 13
+    Caption = 'Floor:'
+    WordWrap = True
+  end
+  object btnStart: TButton
+    Left = 448
+    Top = 368
+    Width = 193
+    Height = 56
+    Caption = 'Start'
+    TabOrder = 0
+    OnClick = btnStartClick
+  end
+  object comboFloor: TComboBox
+    Left = 447
+    Top = 88
+    Width = 194
+    Height = 21
+    TabOrder = 1
+    OnChange = comboFloorChange
+  end
+  object menuMain: TMainMenu
+    Left = 584
+    Top = 232
+  end
+end

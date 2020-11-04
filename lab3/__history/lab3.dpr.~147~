@@ -1,0 +1,190 @@
+program lab3;
+
+{$R *.res}
+
+uses
+  SysUtils;
+
+type
+  TNodeP = ^TNode;
+  TData = record
+    Name: String;
+    PhoneNumber: String[7];
+  end;
+  TNode = record
+    Data: TData;
+    Next: TNodeP;
+  end;
+
+  TLess = function(const a, b: TData): Boolean;
+
+function IsStringPrefix(const a, b: String): Boolean;
+begin
+  if Length(a) >= Length(b) then
+    Result := Copy(a, 1, Length(b)) = b
+  else
+    Result := False;
+end;
+
+function LessPhone(const a, b: TData): Boolean;
+begin
+  Result := a.PhoneNumber < b.PhoneNumber;
+end;
+
+function LessName(const a, b: TData): Boolean;
+begin
+  Result := a.Name < b.Name;
+end;
+
+function EqualName(const a, b: TData): Boolean;
+begin
+  Result := IsStringPrefix(a.Name, b.Name);
+end;
+
+function EqualPhone(const a, b: TData): Boolean;
+begin
+  Result := IsStringPrefix(a.PhoneNumber, b.PhoneNumber);
+end;
+
+function CreateNode(const AData: TData): TNodeP;
+var
+  Tmp: TNodeP;
+begin
+  New(Tmp);
+  Tmp^.Data := AData;
+  Tmp^.Next := nil;
+  Result := Tmp;
+end;
+
+procedure Add(var P: TNodeP; const AData: TData; Less: TLess);
+var
+  Tmp, Tmp1: TNodeP;
+  flag: Boolean;
+begin
+  if (P = nil) or Less(AData, P^.Data) then
+  begin
+    Tmp := CreateNode(AData);
+    Tmp^.Next := P;
+    P := Tmp;
+  end
+  else
+  begin
+    flag := False;
+    Tmp := P;
+    while not Flag and (Tmp^.Next <> nil) do
+    begin
+      if Less(AData, Tmp^.Next^.Data) then
+      begin
+        Tmp1 := CreateNode(AData);
+        Tmp1^.Next := Tmp^.Next;
+        Tmp^.Next := Tmp1;
+        Flag := True;
+      end
+      else Tmp := Tmp^.Next;
+    end;
+    if not Flag then
+    begin
+      Tmp^.Next := CreateNode(AData);
+    end;
+  end;
+end;
+
+function ScanData: TData;
+begin
+  Write('Введите ФИО: ');
+  ReadLn(Result.Name);
+  Write('Введите номер: ');
+  ReadLn(Result.PhoneNumber);
+end;
+
+
+function FetchMenu(const L, R: Integer; Msg: String = 'Выберите пункт меню: '; Flag: Boolean = False): Integer;
+var
+  S: String;
+  ErrPos: Integer;
+begin
+  Write(Msg);
+  ReadLn(S);
+  S := Trim(S);
+  Val(S, Result, ErrPos);
+  while ((Flag) or (Result <> -1)) and ((ErrPos <> 0) or (Result > R) or (Result < L)) do
+  begin
+    WriteLn('Неверный ввод. Попробуйте еще раз.');
+    ReadLn(S);
+    S := Trim(S);
+    Val(S, Result, ErrPos);
+  end;
+end;
+
+procedure PrintData(const AData: TData);
+begin
+  WriteLn(AData.Name:30, AData.PhoneNumber:8);
+end;
+
+procedure ShowList(P: TNodeP);
+begin
+  while P <> nil do
+  begin
+    PrintData(P^.Data);
+    P := P^.Next;
+  end;
+end;
+
+procedure Find(P: TNodeP; const AData: TData; Equal: TLess);
+var
+  Tmp: TNodeP;
+begin
+  while P <> nil do
+  begin
+    if (Equal(P^.Data, AData)) then
+      PrintData(P^.Data);
+    P := P^.Next;
+  end;
+end;
+
+procedure Pause;
+begin
+  WriteLn('Press enter to continue...');
+  ReadLn;
+end;
+
+procedure Menu;
+begin
+  WriteLn('1 - Добавить телефон в список');
+  WriteLn('2 - Поиск по номеру телефона');
+  WriteLn('3 - Поиск по фамилии');
+  WriteLn('4 - Показать список');
+  WriteLn('5 - Выход');
+end;
+
+var
+  List: TNodeP;
+  Current: Integer;
+  Tmp: TData;
+begin
+  Menu;
+  List := nil;
+  Current := FetchMenu(1, 5);
+  while Current <> 5 do
+  begin
+    case Current of
+    1: Add(List, ScanData, LessName);
+    2:
+    begin
+      Write('Введите номер телефона: ');
+      ReadLn(Tmp.PhoneNumber);
+      Find(List, Tmp, EqualPhone);
+    end;
+    3:
+    begin
+      Write('Введите ФИО: ');
+      ReadLn(Tmp.Name);
+      Find(List, Tmp, EqualName);
+    end;
+    4: ShowList(List);
+    end;
+    Menu;
+    Current := FetchMenu(1, 5);
+  end;
+  Pause;
+end.

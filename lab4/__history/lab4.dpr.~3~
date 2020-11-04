@@ -1,0 +1,16 @@
+program lab4;
+
+uses
+  Vcl.Forms,
+  uMain in 'uMain.pas' {frmMain},
+  uList in 'uList.pas',
+  uBase in 'uBase.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrmMain, frmMain);
+  Application.Run;
+end.

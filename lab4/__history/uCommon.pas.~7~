@@ -1,0 +1,18 @@
+unit uCommon;
+
+interface
+
+
+
+type
+  TTerm = record
+    Title: String;
+    Pages: TList<Integer>;
+    SubTerm: TOpenHashTable<TTerm>;
+  end;
+
+  TTermP = TList<TTerm>.TDataP;
+
+implementation
+
+end.

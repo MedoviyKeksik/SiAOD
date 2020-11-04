@@ -1,0 +1,27 @@
+unit uCommon;
+
+interface
+
+uses
+  uList, uOpenHashTable;
+
+type
+  TTerm = record
+    Title: String;
+    Pages: TList<Integer>;
+    SubTerm: TOpenHashTable<TTerm>;
+  end;
+
+  TTermP = TList<TTerm>.TDataP;
+
+
+function IsDigit(C: char): Boolean;
+
+implementation
+
+function IsDigit(C: char): Boolean;
+begin
+  Result := (C <= '9') and (C >= '0');
+end;
+
+end.

@@ -1,0 +1,181 @@
+unit uFind;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.ComCtrls, uCommon, uList, uBase;
+
+type
+  TfrmFind = class(TForm)
+    rgfindBy: TRadioGroup;
+    edtMain: TEdit;
+    btbOk: TButton;
+    btnCancel: TButton;
+    tvMain: TTreeView;
+    procedure edtMainChange(Sender: TObject);
+    procedure rgfindByClick(Sender: TObject);
+  private
+    FData: TTreeNodes;
+    procedure ClearTreeView;
+    { Private declarations }
+  public
+    function CustomModal(Nodes: TTreeNodes): Integer;
+    { Public declarations }
+  end;
+
+var
+  frmFind: TfrmFind;
+
+implementation
+
+{$R *.dfm}
+
+{ TfrmFind }
+
+
+{ TfrmFind }
+
+procedure TfrmFind.ClearTreeView;
+var
+  I: Integer;
+begin
+  for I := 0 to tvMain.Items.Count - 1 do
+    tvMain.Items[I].Delete;
+end;
+
+function TfrmFind.CustomModal(Nodes: TTreeNodes): Integer;
+begin
+  FData := Nodes;
+  edtMain.Text := '';
+  edtMain.OnChange(nil);
+  Result := ShowModal;
+end;
+
+function TermEqual(const a, b: String): Boolean;
+begin
+  if Length(a) = Length(b) then
+    Result := a = b
+  else if Length(a) < Length(b) then
+    Result := False
+  else Result := Copy(a, 1, Length(b)) = b;
+end;
+
+function ListEq(const a, b: TList<Integer>): Boolean;
+var
+  tmpa, tmpb: TList<Integer>.TDataP;
+begin
+  tmpa := a.Front;
+  tmpb := b.Front;
+  Result := False;
+  if tmpb <> nil then
+  begin
+    while tmpa <> nil do
+    begin
+      if tmpa^.Data = tmpb^.Data then
+      begin
+        Result := True;
+        Break;
+      end;
+      tmpa := tmpa^.Next;
+    end;
+  end
+  else
+    Result := True;
+end;
+
+function Parse(Str: String): TList<Integer>;
+var
+  Now: Integer;
+  I: Integer;
+begin
+  Result := TList<Integer>.Create;
+  Now := 0;
+  for I := 1 to Length(Str) do
+  begin
+    if IsDigit(Str[i]) then
+    begin
+      Now := Now * 10;
+      Now := Now + Ord(Str[i]) - Ord('0');
+    end
+    else
+    begin
+      if Now <> 0 then
+      begin
+        Result.PushBack(Now);
+        Now := 0;
+      end;
+    end;
+  end;
+  if (Now <> 0) then
+    Result.PushBack(Now);
+  Result.Sort(Less);
+end;
+
+procedure TfrmFind.edtMainChange(Sender: TObject);
+
+
+var
+  I: Integer;
+  Visited: array of Boolean;
+
+  function IsNeeded(Now: TTreeNode): Boolean;
+  var
+    I: Integer;
+    tmp: TList<Integer>;
+  begin
+    if rgfindBy.ItemIndex = 0 then
+    begin
+      Result := TermEqual(TTermP(Now.Data)^.Data.Title, edtMain.Text);
+    end
+    else
+    begin
+      tmp := Parse(edtMain.Text);
+      Result := ListEq(TTermP(Now.Data)^.Data.Pages, tmp);
+    end;
+
+    for I := 0 to Now.Count - 1 do
+    begin
+      if Result then Break;
+      Result := IsNeeded(Now.Item[I]);
+    end;
+  end;
+
+  procedure Make(Parent, Now: TTreeNode);
+  var
+    I: Integer;
+    Needed: Boolean;
+    Tmp: TTreeNode;
+  begin
+    if Visited[Now.AbsoluteIndex] then
+    
+    Visited[Now.AbsoluteIndex] := True;
+    Needed := IsNeeded(Now);
+    if Needed then
+    begin
+      if Assigned(Parent) then
+        Tmp := tvMain.Items.AddChild(Parent, Now.Text)
+      else
+        Tmp := tvMain.Items.Add(nil, Now.Text);
+      for I := 0 to Now.Count - 1 do
+        Make(Tmp, Now.Item[I]);
+    end;
+  end;
+
+begin
+  ClearTreeView;
+  SetLength(Visited, FData.Count);
+  for I := 0 to Length(Visited) do
+    Visited[I] := False;
+  for I := 0 to FData.Count - 1 do
+  begin
+    Make(nil, FData.Item[I]);
+  end;
+end;
+
+procedure TfrmFind.rgfindByClick(Sender: TObject);
+begin
+  edtMain.OnChange(nil);
+end;
+
+end.

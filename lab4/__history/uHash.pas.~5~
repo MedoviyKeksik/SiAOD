@@ -1,0 +1,14 @@
+unit uHash;
+
+interface
+
+const
+  HashMod = 1e5;
+
+type
+  THash = UInt64;
+  THashF<T> = function(const X: T): THash;
+
+implementation
+
+end.

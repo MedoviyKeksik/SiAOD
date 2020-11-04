@@ -1,0 +1,11 @@
+unit uHash;
+
+interface
+
+type
+  THash = UInt64;
+  THashF<T> = function(const X: T): THash;
+
+implementation
+
+end.

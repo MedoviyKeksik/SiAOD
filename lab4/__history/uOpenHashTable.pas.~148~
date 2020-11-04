@@ -1,0 +1,93 @@
+unit uOpenHashTable;
+
+interface
+
+uses
+  uList, uHash, uBase;
+
+const 
+  DefaultSize = 32;
+  
+type
+  TOpenHashTable<T> = class
+  public type
+    TTable = array of TList<T>;
+  private
+    FHashF: THashF<T>;
+    FCompF: TCompare<T>; 
+    FSize: Integer;
+    FData: TTable;
+  public
+    constructor Create(AHashFunction: THashF<T>; AComp: TCompare<T>);
+    destructor Destroy;
+
+    function Insert(const X: T): TList<T>.TDataP;
+    function Find(const X: T; Comp: TCompare<T>): TList<T>.TArrayDataP;
+    function Erase(const X: TList<T>.TDataP): TList<T>.TDataP;
+
+    property Table: TTable read FData;
+  end;
+
+implementation
+
+{ TOpenHashTable<T> }
+
+constructor TOpenHashTable<T>.Create(AHashFunction: THashF<T>;
+  AComp: TCompare<T>);
+var
+  I: Integer;
+begin
+  FHashF := AHashFunction;
+  FCompF := AComp;
+  FSize := DefaultSize;
+  SetLength(FData, FSize);
+  for I := 0 to DefaultSize - 1 do
+    FData[I] := TList<T>.Create;
+end;
+
+destructor TOpenHashTable<T>.Destroy;
+var
+  I: Integer;
+begin
+  for I := 0 to FSize - 1 do
+    FData[I].Free;
+  Inherited;
+end;
+
+function TOpenHashTable<T>.Erase(const X: TList<T>.TDataP): TList<T>.TDataP;
+var
+  Hash: THash;
+
+begin
+  Hash := FHashF(X);
+  Ind := Hash mod FSize;
+end;
+
+function TOpenHashTable<T>.Find(const X: T; Comp: TCompare<T>): TList<T>.TArrayDataP;
+var
+  I, J: Integer;
+  Tmp: TList<T>.TArrayDataP;
+  ResSize, TmpSize: Integer;
+begin
+  for I := 0 to DefaultSize - 1 do
+  begin
+    Tmp := FData[I].Find(X, Comp);
+    ResSize := ResSize + Length(Tmp);
+    SetLength(Result, ResSize);
+    for J := 0 to Length(Tmp) - 1 do
+      Result[J + ResSize] := Tmp[J];
+  end;
+end;
+
+function TOpenHashTable<T>.Insert(const X: T): TList<T>.TDataP;
+var
+  Hash: THash;
+  Ind: Integer;
+begin
+  Hash := FHashF(X);
+  Ind := Hash mod FSize;
+  FData[Ind].PushBack(X);
+  Result := FData[Ind].Back;
+end;
+
+end.

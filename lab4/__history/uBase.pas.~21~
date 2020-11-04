@@ -1,0 +1,27 @@
+unit uBase;
+
+interface
+
+type
+  TCompare<T> = function(const Left, Right: T): Boolean;
+
+  TPair<TKey, TValue> = class
+
+  end;
+
+function Less(const Left, Right: Integer): Boolean; overload;
+function Less(const Left, Right: Double): Boolean; overload;
+
+implementation
+
+function Less(const Left, Right: Integer): Boolean; overload;
+begin
+  Result := Left < Right;
+end;
+
+function Less(const Left, Right: Double): Boolean; overload;
+begin
+  Result := Left < Right;
+end;
+
+end.

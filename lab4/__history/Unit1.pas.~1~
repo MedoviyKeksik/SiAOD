@@ -1,0 +1,16 @@
+unit Unit1;
+
+interface
+
+type
+
+  TList<T> = class
+  public type
+
+
+
+  end;
+
+implementation
+
+end.

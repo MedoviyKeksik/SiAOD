@@ -1,0 +1,33 @@
+unit uSortType;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls;
+
+type
+  TfrmSortType = class(TForm)
+    rbName: TRadioButton;
+    rbPages: TRadioButton;
+    rbAscending: TRadioButton;
+    rbDescending: TRadioButton;
+    btnOk: TButton;
+    btnCancel: TButton;
+    lblTypeBy: TLabel;
+    lblOrder: TLabel;
+    RadioGroup1: TRadioGroup;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmSortType: TfrmSortType;
+
+implementation
+
+{$R *.dfm}
+
+end.

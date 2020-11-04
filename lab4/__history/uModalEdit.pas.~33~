@@ -1,0 +1,45 @@
+unit uModalEdit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls;
+
+type
+  TfrmEdit = class(TForm)
+    leName: TLabeledEdit;
+    lePages: TLabeledEdit;
+    cbChild: TCheckBox;
+    btnOk: TButton;
+    btnCancel: TButton;
+  private
+    { Private declarations }
+  public
+    function FillAndShow(var AName: String; var APages: String; var IsChild: Boolean): Integer;
+  end;
+
+var
+  frmEdit: TfrmEdit;
+
+implementation
+
+{$R *.dfm}
+
+{ TfrmEdit }
+
+
+{ TfrmEdit }
+
+function TfrmEdit.FillAndShow(var AName, APages: String; var IsChild: Boolean): Boolean;
+begin
+  leName.Text := AName;
+  lePages.Text := APages;
+  cbChild.Checked := IsChild;
+  Result := ShowModal;
+  AName := leName.Text;
+  APages := lePages.Text;
+  IsChild := cbChild.Checked;
+end;
+
+end.

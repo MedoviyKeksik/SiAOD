@@ -1,0 +1,268 @@
+unit uList;
+
+interface
+
+uses
+  uBase;
+
+type
+  TList<T> = class
+  public type
+    TDataP = ^TData;
+    TArrayDataP = array of TDataP;
+    TData = record
+      Data: T;
+      Next: TDataP;
+    end;
+  private
+    FSize: Integer;
+    FHead: TDataP;
+    FTail: TDataP;
+
+    function IsEmpty: Boolean;
+    procedure UpdateTail;
+    function FindPrev(Pos: TDataP): TDataP;
+    procedure SubClear(P: TDataP);
+  public
+    constructor Create;
+    destructor Destroy;
+
+    procedure Clear;
+
+    function Insert(Pos: TDataP; const AData: T): TDataP;
+    function Erase(Pos: TDataP): TDataP;
+    procedure PushBack(const AData: T);
+    procedure PopBack;
+    procedure PushFront(const AData: T);
+    procedure PopFront;
+
+    procedure Sort(Comp: TCompare<T>);
+
+    function Find(Pos: Integer): TDataP; overload;
+    function Find(const AData: T; Comp: TCompare<T>): TArrayDataP; overload;
+
+    property Front: TDataP read FHead;
+    property Back: TDataP read FTail;
+    property Size: Integer read FSize;
+    property Empty: Boolean read IsEmpty;
+  end;
+
+implementation
+
+{ TList<T> }
+
+procedure TList<T>.Clear;
+var
+  Tmp: TDataP;
+begin
+  Tmp := FHead;
+  SubClear(Tmp);
+  FHead := nil;
+  FTail := nil;
+  FSize := 0;
+end;
+
+constructor TList<T>.Create;
+begin
+  FSize := 0;
+  FHead := nil;
+  FTail := nil;
+end;
+
+destructor TList<T>.Destroy;
+begin
+  Self.Clear;
+  Inherited;
+end;
+
+function TList<T>.Erase(Pos: TDataP): TDataP;
+var
+  Tmp: TDataP;
+begin
+  Dec(FSize);
+  Tmp := FindPrev(Pos);
+  if Tmp <> nil then
+  begin
+    Tmp^.Next := Pos^.Next;
+    Dispose(Pos);
+    Result := Tmp^.Next;
+  end
+  else
+  begin
+    Inc(FSize);
+    Self.PopFront;
+    if (FSize = 0) then
+    begin
+      FHead := nil;
+      FTail := nil;
+    end;
+    Result := FHead;
+  end;
+end;
+
+function TList<T>.Find(Pos: Integer): TDataP;
+var
+  Tmp: Integer;
+begin
+  Tmp := 1;
+  Result := FHead;
+  while (Result <> nil) and (Tmp < Pos) do
+  begin
+    Result := Result^.Next;
+    Inc(Tmp);
+  end;
+end;
+
+function TList<T>.Find(const AData: T; Comp: TCompare<T>): TArrayDataP;
+var
+  Tmp: TDataP;
+  Size: Integer;
+begin
+  Size := 0;
+  SetLength(Result, 0);
+  Tmp := FHead;
+  while (Result <> nil) do
+  begin
+    if Comp(Tmp^.Data, AData) then
+    begin
+      Inc(Size);
+      SetLength(Result, Size);
+      Result[Size - 1] := Tmp;
+    end;
+    Tmp := Tmp^.Next;
+  end;
+end;
+
+function TList<T>.FindPrev(Pos: TDataP): TDataP;
+begin
+  if (FHead = Pos) then
+    Result := nil
+  else
+  begin
+    Result := FHead;
+    while Result^.Next <> Pos do
+      Result := Result^.Next;
+  end;
+end;
+
+function TList<T>.Insert(Pos: TDataP; const AData: T): TDataP;
+var
+  Tmp: TDataP;
+begin
+  New(Tmp);
+  Tmp^.Data := Pos^.Data;
+  Tmp^.Next := Pos^.Next;
+  Pos^.Data := AData;
+  Pos^.Next := Tmp;
+  Inc(FSize);
+  UpdateTail;
+  Result := Pos;
+end;
+
+function TList<T>.IsEmpty: Boolean;
+begin
+  Result := FSize = 0;
+end;
+
+procedure TList<T>.PopBack;
+begin
+  FTail := FindPrev(FTail);
+  Dec(FSize);
+  Dispose(FTail^.Next);
+  FTail^.Next := nil;
+end;
+
+procedure TList<T>.PopFront;
+var
+  Tmp: TDataP;
+begin
+  Tmp := FHead;
+  FHead := FHead^.Next;
+  Dec(FSize);
+  Dispose(Tmp);
+end;
+
+procedure TList<T>.PushBack(const AData: T);
+begin
+  if FTail = nil then
+  begin
+    New(FHead);
+    FHead^.Data := AData;
+    FHead^.Next := nil;
+    Inc(FSize);
+    UpdateTail;
+  end
+  else
+  begin
+    New(FTail^.Next);
+    FTail := FTail^.Next;
+    FTail^.Data := AData;
+    FTail^.Next := nil;
+    Inc(FSize);
+  end;
+end;
+
+procedure TList<T>.PushFront(const AData: T);
+var
+  Tmp: TDataP;
+begin
+  Tmp := FHead;
+  New(FHead);
+  FHead^.Next := Tmp;
+  FHead^.Data := AData;
+  Inc(FSize);
+  UpdateTail;
+end;
+
+procedure TList<T>.Sort(Comp: TCompare<T>);
+var
+  Now: TDataP;
+  Mn: TDataP;
+  Tmp: TDataP;
+  A: TData;
+  I: Integer;
+begin
+  Now := FHead;
+  if (Now^.Next <> nil) then
+  begin
+    for I := 1 to FSize - 1 do
+    begin
+      Mn := Now;
+      Tmp := Now^.Next;
+      while Tmp <> nil do
+      begin
+        if Comp(tmp^.Data, Mn^.Data) then
+          Mn := tmp;
+        tmp := tmp^.Next;
+      end;
+      A := Now^.Data;
+      Now^.Data := Mn^.Data;
+      Mn^.Data := A;
+      (Now^.Data, Mn^.Data);
+      Now := Now^.Next;
+    end;
+
+  end;
+
+end;
+
+procedure TList<T>.SubClear(P: TDataP);
+begin
+  if P <> nil then
+  begin
+    SubClear(P^.Next);
+    Dispose(P);
+  end;
+end;
+
+procedure TList<T>.UpdateTail;
+begin
+  if (FSize = 1) then FTail := FHead
+  else
+  begin
+    while FTail^.Next <> nil do
+      FTail := FTail^.Next;
+  end;
+end;
+
+end.

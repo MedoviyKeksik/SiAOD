@@ -1,0 +1,29 @@
+unit uSortType;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls;
+
+type
+  TfrmSortType = class(TForm)
+    btnOk: TButton;
+    btnCancel: TButton;
+    rgSortBy: TRadioGroup;
+    rgSortOrder: TRadioGroup;
+  private
+    { Private declarations }
+  public
+    function (var SortType: Boolean; var Order: Boolean): Integer;
+    { Public declarations }
+  end;
+
+var
+  frmSortType: TfrmSortType;
+
+implementation
+
+{$R *.dfm}
+
+end.

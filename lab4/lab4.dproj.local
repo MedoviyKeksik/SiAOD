@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.765,D:\Student\SiAOD\lab4\Unit1.dfm=D:\Student\SiAOD\lab4\uMain.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.366,D:\Student\SiAOD\lab4\Unit1.dfm=D:\Student\OAiP\Unit1.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.957,D:\Student\SiAOD\lab4\Unit1.dfm=D:\Student\SiAOD\lab4\uSortType.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.333,D:\Student\SiAOD\lab4\uMain.dfm=D:\Student\SiAOD\lab4\Unit1.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.795,D:\Student\SiAOD\lab4\uModalEdit.dfm=D:\Student\SiAOD\lab4\Unit1.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.657,D:\Student\SiAOD\lab4\uFind.dfm=D:\Student\SiAOD\lab4\Unit1.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.758,D:\Student\SiAOD\lab4\uMain.dfm=D:\Student\SiAOD\lab4\Unit1.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.795,D:\Student\SiAOD\lab4\uModalEdit.pas=D:\Student\SiAOD\lab4\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.956,D:\Student\SiAOD\lab4\uHash.pas=D:\Student\SiAOD\lab4\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.421,D:\Student\SiAOD\lab4\uList.pas=D:\Student\SiAOD\lab4\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.800,D:\Student\SiAOD\lab4\uBase.pas=D:\Student\SiAOD\lab4\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.333,D:\Student\SiAOD\lab4\uMain.pas=D:\Student\SiAOD\lab4\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.758,D:\Student\SiAOD\lab4\uMain.pas=D:\Student\SiAOD\lab4\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.536,D:\Student\SiAOD\lab4\lab4.dproj=D:\Student\OAiP\Project1.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.022,=D:\Student\OAiP\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.588,=D:\Student\SiAOD\lab4\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.298,=D:\Student\SiAOD\lab4\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.459,=D:\Student\SiAOD\lab4\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.957,D:\Student\SiAOD\lab4\Unit1.pas=D:\Student\SiAOD\lab4\uSortType.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.075,D:\Student\SiAOD\lab4\uOpenHashTable.pas=D:\Student\SiAOD\lab4\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.657,D:\Student\SiAOD\lab4\uFind.pas=D:\Student\SiAOD\lab4\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.366,D:\Student\SiAOD\lab4\Unit1.pas=D:\Student\OAiP\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.245,=D:\Student\SiAOD\lab4\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.309,=D:\Student\SiAOD\lab4\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.111,=D:\Student\SiAOD\lab4\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.422,=D:\Student\SiAOD\lab4\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.033,=D:\Student\SiAOD\lab4\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.765,D:\Student\SiAOD\lab4\Unit1.pas=D:\Student\SiAOD\lab4\uMain.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.734,D:\Student\SiAOD\lab4\Unit1.pas=D:\Student\SiAOD\lab4\uCommon.pas</Transaction>
+  </Transactions>
+</BorlandProject>
