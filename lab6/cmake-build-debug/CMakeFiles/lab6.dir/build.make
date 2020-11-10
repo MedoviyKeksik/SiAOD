@@ -79,15 +79,15 @@ include CMakeFiles/lab6.dir/flags.make
 CMakeFiles/lab6.dir/main.cpp.obj: CMakeFiles/lab6.dir/flags.make
 CMakeFiles/lab6.dir/main.cpp.obj: ../main.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Student\SiAOD\lab6\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/lab6.dir/main.cpp.obj"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-W\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\lab6.dir\main.cpp.obj -c D:\Student\SiAOD\lab6\main.cpp
+	C:\MinGW\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\lab6.dir\main.cpp.obj -c D:\Student\SiAOD\lab6\main.cpp
 
 CMakeFiles/lab6.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/lab6.dir/main.cpp.i"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-W\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\Student\SiAOD\lab6\main.cpp > CMakeFiles\lab6.dir\main.cpp.i
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\Student\SiAOD\lab6\main.cpp > CMakeFiles\lab6.dir\main.cpp.i
 
 CMakeFiles/lab6.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/lab6.dir/main.cpp.s"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-W\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Student\SiAOD\lab6\main.cpp -o CMakeFiles\lab6.dir\main.cpp.s
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Student\SiAOD\lab6\main.cpp -o CMakeFiles\lab6.dir\main.cpp.s
 
 # Object files for target lab6
 lab6_OBJECTS = \
